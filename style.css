@@ -26,7 +26,7 @@
       margin-bottom: 30px;
       width: 100%;
       height: 400px;
-      background-image: url(images/01.webp); /*set your image address */
+      background-image: url(https://dkstatics-public.digikala.com/digikala-products/b809af600e74f4ee0c1722c05b9466693a76e6a6_1722673336.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/format,webp/quality,q_90); /*set your image address */
       overflow: hidden;
       img {
         width: 100%;
@@ -79,7 +79,7 @@
       position: absolute;
       top: 12%;
       left: 18%;
-      background-image: url(images/01.webp); /*set your image address */
+      background-image: url(https://dkstatics-public.digikala.com/digikala-products/b809af600e74f4ee0c1722c05b9466693a76e6a6_1722673336.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/format,webp/quality,q_90); /*set your image address */
       display: none;
     }
   }
