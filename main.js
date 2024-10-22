@@ -28,6 +28,11 @@ function zoomyFunction(event) {
     floatingWindow.style.display = "none";
     bgSlide.classList.remove("floatWindowActived");
   } else if (zoomyElem.dataset.floatingWindow == "true") {
+    if (window.innerWidth <= 500) {
+      zoomyElem.dataset.floatingWindow = "false";
+      alert("this feature can not apply on your screen size");
+      return;
+    }
     let { clientX, clientY } = event;
     let leftPosition = bgSlide.getBoundingClientRect().left;
     let topPosition = bgSlide.getBoundingClientRect().top;
@@ -37,7 +42,6 @@ function zoomyFunction(event) {
     bgSlide.classList.add("floatWindowActived");
   }
 }
-
 bgSlide.addEventListener("mousemove", (event) => {
   squareSetting(event);
   zoomyFunction(event);
@@ -61,3 +65,102 @@ imgTags.forEach((img) =>
     floatingWindow.style.backgroundImage = `url(${src})`;
   })
 );
+
+const slidesContainer = document.querySelector(".slides-container");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slidesContainer.addEventListener("mousedown", (e) => {
+  isDown = true;
+  slidesContainer.classList.add("active");
+  startX = e.pageX - slidesContainer.offsetLeft;
+  scrollLeft = slidesContainer.scrollLeft;
+});
+
+slidesContainer.addEventListener("mouseleave", () => {
+  isDown = false;
+  slidesContainer.classList.remove("active");
+});
+
+slidesContainer.addEventListener("mouseup", () => {
+  isDown = false;
+  slidesContainer.classList.remove("active");
+});
+
+slidesContainer.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slidesContainer.offsetLeft;
+  const walk = (x - startX) * 3;
+  slidesContainer.scrollLeft = scrollLeft - walk;
+});
+
+slidesContainer.addEventListener("touchstart", (e) => {
+  isDown = true;
+  startX = e.touches[0].pageX - slidesContainer.offsetLeft;
+  scrollLeft = slidesContainer.scrollLeft;
+});
+
+slidesContainer.addEventListener("touchend", () => {
+  isDown = false;
+});
+
+slidesContainer.addEventListener("touchmove", (e) => {
+  if (!isDown) return;
+  const x = e.touches[0].pageX - slidesContainer.offsetLeft;
+  const walk = (x - startX) * 3;
+  slidesContainer.scrollLeft = scrollLeft - walk;
+});
+
+isDown = false;
+startX;
+scrollLeft;
+
+const images = slidesContainer.querySelectorAll("img");
+images.forEach((img) => {
+  img.draggable = false;
+});
+
+slidesContainer.addEventListener("mousedown", (e) => {
+  isDown = true;
+  slidesContainer.classList.add("active");
+  startX = e.pageX - slidesContainer.offsetLeft;
+  scrollLeft = slidesContainer.scrollLeft;
+  e.preventDefault();
+});
+
+slidesContainer.addEventListener("mouseleave", () => {
+  isDown = false;
+  slidesContainer.classList.remove("active");
+});
+
+slidesContainer.addEventListener("mouseup", () => {
+  isDown = false;
+  slidesContainer.classList.remove("active");
+});
+
+slidesContainer.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slidesContainer.offsetLeft;
+  const walk = (x - startX) * 3;
+  slidesContainer.scrollLeft = scrollLeft - walk;
+});
+
+slidesContainer.addEventListener("touchstart", (e) => {
+  isDown = true;
+  startX = e.touches[0].pageX - slidesContainer.offsetLeft;
+  scrollLeft = slidesContainer.scrollLeft;
+});
+
+slidesContainer.addEventListener("touchend", () => {
+  isDown = false;
+});
+
+slidesContainer.addEventListener("touchmove", (e) => {
+  if (!isDown) return;
+  const x = e.touches[0].pageX - slidesContainer.offsetLeft;
+  const walk = (x - startX) * 3;
+  slidesContainer.scrollLeft = scrollLeft - walk;
+});
